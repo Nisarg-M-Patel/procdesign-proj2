@@ -197,14 +197,12 @@ always @(*) begin
   case (type_immediate_DE )  
   `I_immediate: sxt_imm_DE = {{21{inst_DE[31]}}, inst_DE[30:25], inst_DE[24:21], inst_DE[20]};
    `B_immediate: sxt_imm_DE = {{20{inst_DE[31]}}, inst_DE[7], inst_DE[30:25], inst_DE[11:8], 1'b0};
-    /*
   `S_immediate: 
-     sxt_imm_DE =  ... 
+     sxt_imm_DE = {{21{inst_DE[31]}}, inst_DE[30:25], inst_DE[11:8], inst_DE[7]};
    `U_immediate: 
-     sxt_imm_DE = ... 
+     sxt_imm_DE = {inst_DE[31], inst_DE[30:20], inst_DE[19:12], 12'b0};
    `J_immediate: 
-    sxt_imm_DE = ... 
-    */ 
+    sxt_imm_DE = {{12{inst_DE[31]}}, inst_DE[19:12], inst_DE[20], inst_DE[30:25], inst_DE[24:21], 1'b0};
    default:
     sxt_imm_DE = 32'b0; 
   endcase  
@@ -218,36 +216,47 @@ end
   wire [`DBITS-1:0] rs1_val_DE;
   wire [`DBITS-1:0] rs2_val_DE;
 
-  wire is_br_DE;    // is conditional branch instr
-  wire wr_reg_DE;   // is writing back to register file
+  wire is_br_DE;
+  wire is_jmp_DE;
+  wire wr_reg_DE;
 
-  // Decode instruction registers
   assign rs1_DE = inst_DE[19:15];
   assign rs2_DE = inst_DE[24:20];
   assign rd_DE  = inst_DE[11:7]; 
 
-  // Read register file
   assign rs1_val_DE = regs[rs1_DE];
   assign rs2_val_DE = regs[rs2_DE];
 
 
-  assign is_br_DE  = ((op_I_DE == `BEQ_I) || (op_I_DE == `BNE_I))? 1 : 0;
-  assign wr_reg_DE = ((op_I_DE == `ADD_I) || 
-                      (op_I_DE == `ADDI_I) || 
-                      (op_I_DE == `ANDI_I)) ? ((rd_DE != 0) ? 1 : 0): 0; 
+  assign is_br_DE  = ((op_I_DE == `BEQ_I) || (op_I_DE == `BNE_I) || 
+                      (op_I_DE == `BLT_I) || (op_I_DE == `BGE_I) ||
+                      (op_I_DE == `BLTU_I) || (op_I_DE == `BGEU_I))? 1 : 0;
+  
+  assign is_jmp_DE = ((op_I_DE == `JAL_I) || (op_I_DE == `JALR_I)) ? 1 : 0;
+  
+  assign wr_reg_DE = ((op_I_DE == `ADD_I) || (op_I_DE == `SUB_I) ||
+                      (op_I_DE == `AND_I) || (op_I_DE == `OR_I) || (op_I_DE == `XOR_I) ||
+                      (op_I_DE == `SLT_I) || (op_I_DE == `SLTU_I) ||
+                      (op_I_DE == `SRA_I) || (op_I_DE == `SRL_I) || (op_I_DE == `SLL_I) ||
+                      (op_I_DE == `MUL_I) ||
+                      (op_I_DE == `ADDI_I) || (op_I_DE == `ANDI_I) || (op_I_DE == `ORI_I) ||
+                      (op_I_DE == `XORI_I) || (op_I_DE == `SLTI_I) || (op_I_DE == `SLTIU_I) ||
+                      (op_I_DE == `SRAI_I) || (op_I_DE == `SRLI_I) || (op_I_DE == `SLLI_I) ||
+                      (op_I_DE == `LUI_I) || (op_I_DE == `AUIPC_I) ||
+                      (op_I_DE == `JAL_I) || (op_I_DE == `JALR_I) ||
+                      (op_I_DE == `LW_I)) ? ((rd_DE != 0) ? 1 : 0): 0; 
 
  /* this signal is passed from WB stage */ 
-  wire wr_reg_WB; // is this instruction writing into a register file? 
-  wire [`REGNOBITS-1:0] wregno_WB; // destination register ID 
-  wire [`DBITS-1:0] regval_WB;  // the contents to be written in the register file (or CSR )
+  wire wr_reg_WB;
+  wire [`REGNOBITS-1:0] wregno_WB;
+  wire [`DBITS-1:0] regval_WB;
 
 
-  // signals come from WB stage for register WB 
   assign { wr_reg_WB, wregno_WB, regval_WB} = from_WB_to_DE;  
 
 
   wire pipeline_stall_DE; 
-  assign from_DE_to_FE = {pipeline_stall_DE}; // pass the DE stage stall signal to FE stage 
+  assign from_DE_to_FE = {pipeline_stall_DE};
 
   reg use_rs1_DE;
   reg use_rs2_DE;
@@ -277,13 +286,11 @@ end
     endcase
   end
   
-  // Handle data dependency
 
   reg [31:0] in_use_regs;
   wire has_data_hazards;
   wire br_mispred_AGEX;
 
-  // process AGEX forwarding
   assign { 
     br_mispred_AGEX          
   } = from_AGEX_to_DE;
@@ -307,17 +314,15 @@ end
     end
   end
 
-// decoding the contents of FE latch out. the order should be matched with the fe_stage.v 
   assign {
             valid_DE,
             inst_DE,
             PC_DE, 
             pcplus_DE,
             inst_count_DE 
-            }  = from_FE_latch;  // based on the contents of the latch, you can decode the content 
+            }  = from_FE_latch;
 
 
-// assign wire to send the contents of DE latch to other pipeline stages  
   assign DE_latch_out = DE_latch; 
 
    assign DE_latch_contents = {
@@ -327,11 +332,11 @@ end
                                   pcplus_DE,
                                   op_I_DE,
                                   inst_count_DE,
-                                  // more signals might need
                                   rs1_val_DE,
                                   rs2_val_DE,    
                                   sxt_imm_DE,
                                   is_br_DE,
+                                  is_jmp_DE,
                                   wr_reg_DE,
                                   rd_DE
                                   }; 
@@ -341,7 +346,6 @@ end
 
 
   always @ (negedge clk) begin 
-  /* register write code is completed for your benefit */ 
     if(reset) begin 
       regs[0] <= {`DBITS{1'b0}};
       regs[1] <= {`DBITS{1'b0}};
@@ -381,7 +385,7 @@ end
   end
 
 
-always @ (posedge clk) begin // you need to expand this always block 
+always @ (posedge clk) begin
     if(reset) begin
       DE_latch <= {`DE_latch_WIDTH{1'b0}};
       end
@@ -396,4 +400,3 @@ always @ (posedge clk) begin // you need to expand this always block
 
 
 endmodule
-
