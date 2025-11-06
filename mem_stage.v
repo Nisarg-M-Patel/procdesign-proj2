@@ -36,6 +36,7 @@ module MEM_STAGE(
 
 
 // **TODO: Complete the rest of the pipeline 
+  wire rd_mem_MEM;
 
   wire [`DBITS-1:0] aluout_MEM;  // memory write value 
   wire [`REGNOBITS-1:0] wregno_MEM;
@@ -48,7 +49,7 @@ module MEM_STAGE(
   // Read from D-MEM  (read code is completed if there is a correct memaddr_MEM ) 
   assign rd_val_MEM = dmem[memaddr_MEM[`DMEMADDRBITS-1:`DMEMWORDBITS]];
 
-  
+  assign wr_val_MEM = aluout_MEM;
  // Write to D-MEM
   always @ (posedge clk) begin
   if(wr_mem_MEM)
@@ -70,7 +71,10 @@ module MEM_STAGE(
                                 op_I_MEM,
                                 inst_count_MEM,
                                  // more signals might need
+                                memaddr_MEM, 
                                 aluout_MEM,
+                                rd_mem_MEM,
+                                wr_mem_MEM,
                                 wr_reg_MEM,
                                 wregno_MEM
                                  } = from_AGEX_latch;  
@@ -84,6 +88,7 @@ module MEM_STAGE(
                                 op_I_MEM,
                                 inst_count_MEM,
                                         // more signals might need 
+                                rd_val_MEM, 
                                 aluout_MEM,
                                 wr_reg_MEM,
                                 wregno_MEM                
