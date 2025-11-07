@@ -191,6 +191,9 @@
   `define CSR_NUMCORES 0xFC1
   `define CSR_STATS_EN 0x7C1 
 
+  `define CSR_BR_COUNT 0x7C2     // Total executed branch instructions  
+  `define CSR_BR_CORRECT 0x7C3   // Correctly predicted branches
+
 
   `define UNUSED_PARAM(x)  
 

@@ -26,10 +26,7 @@ module AGEX_STAGE(
   wire [`DBITS-1:0] inst_count_AGEX; 
   wire [`DBITS-1:0] pcplus_AGEX; 
   wire [`IOPBITS-1:0] op_I_AGEX;
-  reg br_cond_AGEX; // 1 means a branch condition is satisified. 0 means a branch condition is not satisifed
- 
-  /////////////////////////////////////////////////////////////////////////////
-  // TODO: Complete remaining code logic here!
+  reg br_cond_AGEX; // 1 means a branch condition is satisfied. 0 means a branch condition is not satisfied
 
   wire is_br_AGEX;
   wire is_jmp_AGEX;
@@ -52,9 +49,11 @@ module AGEX_STAGE(
   reg [`BHR_WIDTH-1:0] updated_bhr_AGEX;
   reg update_bhr_AGEX;
 
-  
+  // *** ADDED: Branch prediction accuracy counters ***
+  reg [`DBITS-1:0] br_count;      // Total executed branch instructions
+  reg [`DBITS-1:0] br_correct;    // Correctly predicted branches
+
   // Calculate branch condition
-  // TODO: complete the code
   always @ (*) begin
     case (op_I_AGEX)
     `BEQ_I : br_cond_AGEX = (regval1_AGEX == regval2_AGEX);
@@ -68,7 +67,6 @@ module AGEX_STAGE(
   end
 
   // Compute ALU operations  (alu out or memory addresses)
-  // TODO: complete the code
   always @ (*) begin
     case (op_I_AGEX)
     `ADD_I:   aluout_AGEX = regval1_AGEX + regval2_AGEX; 
@@ -100,6 +98,18 @@ module AGEX_STAGE(
       memaddr_AGEX = regval1_AGEX + sxt_imm_AGEX;
       aluout_AGEX = regval2_AGEX; 
     end
+    // *** MODIFIED: CSR read instructions - added new counters ***
+    `CSRR_I: begin
+      case (sxt_imm_AGEX[11:0])  // CSR address is in immediate field
+        `CSR_BR_COUNT: aluout_AGEX = br_count;       // NEW: total branch count
+        `CSR_BR_CORRECT: aluout_AGEX = br_correct;   // NEW: correct predictions
+        `CSR_PROC2MNGR: aluout_AGEX = 32'h0;         // Placeholder 
+        `CSR_STATS_EN: aluout_AGEX = 32'h1;          // Placeholder
+        `CSR_COREID: aluout_AGEX = 32'h0;            // Placeholder
+        `CSR_NUMCORES: aluout_AGEX = 32'h1;          // Placeholder
+        default: aluout_AGEX = 32'h0;
+      endcase
+    end
     default: begin 
       aluout_AGEX  = '0;
       memaddr_AGEX = '0;		  
@@ -109,7 +119,6 @@ module AGEX_STAGE(
 
   // branch target needs to be computed here 
   // computed branch target needs to send to other pipeline stages (br_target_AGEX)
-  // TODO: complete the code
   always @(*)begin
     if (op_I_AGEX == `JAL_I) 
       br_target_AGEX  = PC_AGEX + sxt_imm_AGEX;
@@ -140,6 +149,30 @@ module AGEX_STAGE(
     end
   end
 
+  // *** ADDED: Branch prediction accuracy tracking ***
+  always @(posedge clk) begin
+    if (reset) begin
+      br_count <= 32'h0;
+      br_correct <= 32'h0;
+    end else if (valid_AGEX && is_br_AGEX) begin
+      // Count executed branch instructions  
+      br_count <= br_count + 1'b1;
+      
+      // Count correct predictions (no misprediction = correct)
+      if (!br_mispred_AGEX) begin
+        br_correct <= br_correct + 1'b1;
+      end
+    end
+    
+    // *** OPTIONAL: Handle CSR writes for counter reset ***
+    if (valid_AGEX && (op_I_AGEX == `CSRW_I)) begin
+      case (sxt_imm_AGEX[11:0])
+        `CSR_BR_COUNT: br_count <= regval1_AGEX;
+        `CSR_BR_CORRECT: br_correct <= regval1_AGEX;
+      endcase
+    end
+  end
+
   assign  {                     
                               valid_AGEX,
                               inst_AGEX,
@@ -147,7 +180,6 @@ module AGEX_STAGE(
                               pcplus_AGEX,
                               op_I_AGEX,
                               inst_count_AGEX,
-                                      // more signals might need
                               regval1_AGEX,
                               regval2_AGEX,
                               sxt_imm_AGEX,                                
@@ -160,14 +192,12 @@ module AGEX_STAGE(
                               pht_index_AGEX  // PHT index from branch predictor
                               } = from_DE_latch; 
     
- 
   assign AGEX_latch_contents = {
                                 valid_AGEX,
                                 inst_AGEX,
                                 PC_AGEX,
                                 op_I_AGEX,
                                 inst_count_AGEX,
-                                       // more signals might need
                                 memaddr_AGEX, 
                                 aluout_AGEX,
                                 rd_mem_AGEX,
@@ -185,7 +215,6 @@ module AGEX_STAGE(
             AGEX_latch <= AGEX_latch_contents ;
         end 
   end
-
 
   // forward signals to FE stage
   assign from_AGEX_to_FE = { 
