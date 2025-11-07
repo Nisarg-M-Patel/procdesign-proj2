@@ -191,8 +191,7 @@
   `define CSR_NUMCORES 0xFC1
   `define CSR_STATS_EN 0x7C1 
 
-  `define CSR_BR_COUNT 12'h7C2
-  `define CSR_BR_CORRECT 12'h7C3
+  
 
 
   `define UNUSED_PARAM(x)  
