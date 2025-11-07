@@ -103,10 +103,10 @@ module AGEX_STAGE(
       case (sxt_imm_AGEX[11:0])  // CSR address is in immediate field
         `CSR_BR_COUNT: aluout_AGEX = br_count;       // NEW: total branch count
         `CSR_BR_CORRECT: aluout_AGEX = br_correct;   // NEW: correct predictions
-        `CSR_PROC2MNGR: aluout_AGEX = 32'h0;         // Placeholder 
-        `CSR_STATS_EN: aluout_AGEX = 32'h1;          // Placeholder
-        `CSR_COREID: aluout_AGEX = 32'h0;            // Placeholder
-        `CSR_NUMCORES: aluout_AGEX = 32'h1;          // Placeholder
+        `CSR_PROC2MNGR: aluout_AGEX = 32'h0;         // proc2mngr placeholder 
+        `CSR_STATS_EN: aluout_AGEX = 32'h1;          // stats_en placeholder
+        `CSR_COREID: aluout_AGEX = 32'h0;            // coreid placeholder
+        `CSR_NUMCORES: aluout_AGEX = 32'h1;          // numcores placeholder
         default: aluout_AGEX = 32'h0;
       endcase
     end
@@ -154,22 +154,24 @@ module AGEX_STAGE(
     if (reset) begin
       br_count <= 32'h0;
       br_correct <= 32'h0;
-    end else if (valid_AGEX && is_br_AGEX) begin
-      // Count executed branch instructions  
-      br_count <= br_count + 1'b1;
-      
-      // Count correct predictions (no misprediction = correct)
-      if (!br_mispred_AGEX) begin
-        br_correct <= br_correct + 1'b1;
+    end else begin
+      // Count branches
+      if (valid_AGEX && is_br_AGEX) begin
+        br_count <= br_count + 1'b1;
+        
+        // Count correct predictions (no misprediction = correct)
+        if (!br_mispred_AGEX) begin
+          br_correct <= br_correct + 1'b1;
+        end
       end
-    end
-    
-    // *** OPTIONAL: Handle CSR writes for counter reset ***
-    if (valid_AGEX && (op_I_AGEX == `CSRW_I)) begin
-      case (sxt_imm_AGEX[11:0])
-        `CSR_BR_COUNT: br_count <= regval1_AGEX;
-        `CSR_BR_CORRECT: br_correct <= regval1_AGEX;
-      endcase
+      
+      // Handle CSR writes for counter reset
+      if (valid_AGEX && (op_I_AGEX == `CSRW_I)) begin
+        case (sxt_imm_AGEX[11:0])
+          `CSR_BR_COUNT: br_count <= regval1_AGEX;      // Reset branch count
+          `CSR_BR_CORRECT: br_correct <= regval1_AGEX;  // Reset correct count
+        endcase
+      end
     end
   end
 
