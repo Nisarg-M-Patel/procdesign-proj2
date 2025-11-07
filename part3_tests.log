@@ -3,178 +3,172 @@ TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/add.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/add.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/add.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/and.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/and.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/and.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/and.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/andi.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/andi.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/andi.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/andi.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bgeu.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bgeu.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bgeu.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bgeu.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/blt.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/blt.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/blt.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/blt.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bltu.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bltu.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bltu.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bltu.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bne.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bne.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bne.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/bne.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/jal.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/jal.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/jal.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/jal.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/jalr.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/jalr.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/jalr.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/jalr.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/lui.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/lui.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/lui.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/lui.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/lw.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/lw.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/lw.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/lw.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/or.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/or.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/or.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/or.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/ori.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/ori.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/ori.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/ori.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/simple.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/simple.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/simple.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/simple.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sll.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sll.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sll.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sll.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slli.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slli.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slli.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slli.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slt.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slt.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slt.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slt.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slti.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slti.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slti.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/slti.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sltiu.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sltiu.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sltiu.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sltiu.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sltu.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sltu.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sltu.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sltu.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sra.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sra.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sra.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sra.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srai.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srai.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srai.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srai.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srl.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srl.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srl.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srl.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srli.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srli.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srli.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/srli.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sub.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sub.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sub.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-
-TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sw.mem
--- VERILATE ----------------
-/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sw.mem
-/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sw.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/sub.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/test10.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/test10.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/test10.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/test10.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/testall.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/testall.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/testall.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/testall.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/xor.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/xor.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/xor.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/xor.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'
 
 TESTING: /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/xori.mem
 -- VERILATE ----------------
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/xori.mem
 /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
-sed -i 's|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/xori.mem"|g'  /Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh
+sed -i ''s|define IDMEMINITFILE.*|define IDMEMINITFILE "/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/test/part3/xori.mem"|g' ' '/Users/nisargpatel/Documents/fall2025/cs3220/procdesign-proj2/define.vh'

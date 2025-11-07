@@ -28,6 +28,7 @@ module DE_STAGE(
   wire [`DBITS-1:0] PC_DE;
   wire [`DBITS-1:0] pcplus_DE; 
   wire [`DBITS-1:0] inst_count_DE; 
+  wire [`PHT_INDEX_BITS-1:0] pht_index_DE;  // Branch predictor PHT index
   wire[`DE_latch_WIDTH-1:0] DE_latch_contents; 
 
  
@@ -338,7 +339,8 @@ end
             inst_DE,
             PC_DE, 
             pcplus_DE,
-            inst_count_DE 
+            inst_count_DE,
+            pht_index_DE  // PHT index from branch predictor
             }  = from_FE_latch;  // based on the contents of the latch, you can decode the content 
 
 
@@ -361,7 +363,8 @@ end
                                   rd_mem_DE,
                                   wr_mem_DE,
                                   wr_reg_DE,
-                                  rd_DE
+                                  rd_DE,
+                                  pht_index_DE  // Pass PHT index to AGEX stage
                                   }; 
 
 
@@ -424,4 +427,3 @@ always @ (posedge clk) begin // you need to expand this always block
 
 
 endmodule
-

@@ -47,6 +47,11 @@ module AGEX_STAGE(
   reg [`DBITS-1:0] br_target_AGEX;
   wire br_mispred_AGEX;
 
+  // Branch predictor signals
+  wire [`PHT_INDEX_BITS-1:0] pht_index_AGEX;
+  reg [`BHR_WIDTH-1:0] updated_bhr_AGEX;
+  reg update_bhr_AGEX;
+
   
   // Calculate branch condition
   // TODO: complete the code
@@ -121,24 +126,39 @@ module AGEX_STAGE(
   assign br_mispred_AGEX = ((is_br_AGEX || is_jmp_AGEX) 
                          && (br_target_AGEX != pcplus_AGEX)) ? 1 : 0;
 
-    assign  {                     
-                                  valid_AGEX,
-                                  inst_AGEX,
-                                  PC_AGEX,
-                                  pcplus_AGEX,
-                                  op_I_AGEX,
-                                  inst_count_AGEX,
-                                          // more signals might need
-                                  regval1_AGEX,
-                                  regval2_AGEX,
-                                  sxt_imm_AGEX,                                
-                                  is_br_AGEX,
-                                  is_jmp_AGEX,
-                                  rd_mem_AGEX,
-                                  wr_mem_AGEX,
-                                  wr_reg_AGEX,
-                                  wregno_AGEX
-                                  } = from_DE_latch; 
+  // Determine actual branch outcome and update BHR
+  wire actual_taken_AGEX;
+  assign actual_taken_AGEX = (is_br_AGEX && br_cond_AGEX) || is_jmp_AGEX;
+
+  always @(*) begin
+    if (is_br_AGEX || is_jmp_AGEX) begin
+      update_bhr_AGEX = 1'b1;
+      updated_bhr_AGEX = {pht_index_AGEX[`BHR_WIDTH-2:0], actual_taken_AGEX};  // Shift and add new bit
+    end else begin
+      update_bhr_AGEX = 1'b0;
+      updated_bhr_AGEX = {`BHR_WIDTH{1'b0}};
+    end
+  end
+
+  assign  {                     
+                              valid_AGEX,
+                              inst_AGEX,
+                              PC_AGEX,
+                              pcplus_AGEX,
+                              op_I_AGEX,
+                              inst_count_AGEX,
+                                      // more signals might need
+                              regval1_AGEX,
+                              regval2_AGEX,
+                              sxt_imm_AGEX,                                
+                              is_br_AGEX,
+                              is_jmp_AGEX,
+                              rd_mem_AGEX,
+                              wr_mem_AGEX,
+                              wr_reg_AGEX,
+                              wregno_AGEX,
+                              pht_index_AGEX  // PHT index from branch predictor
+                              } = from_DE_latch; 
     
  
   assign AGEX_latch_contents = {
@@ -170,7 +190,9 @@ module AGEX_STAGE(
   // forward signals to FE stage
   assign from_AGEX_to_FE = { 
     br_mispred_AGEX, 
-    br_target_AGEX
+    br_target_AGEX,
+    update_bhr_AGEX,
+    updated_bhr_AGEX
   };
 
   // forward signals to DE stage

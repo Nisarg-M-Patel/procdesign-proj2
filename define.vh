@@ -201,14 +201,14 @@
 
 /** please update the following define with your own values */ 
 
- `define FE_latch_WIDTH  (1 + `INSTBITS+`DBITS+ `DBITS + `DBITS)
-  `define DE_latch_WIDTH  (1 + `INSTBITS+`DBITS+`DBITS+ `IOPBITS + `DBITS + `DBITS + `DBITS + `DBITS + 1 + 1 + 1 + 1 + 1 + `REGNOBITS)
+ `define FE_latch_WIDTH  (1 + `INSTBITS+`DBITS+ `DBITS + `DBITS + `PHT_INDEX_BITS)
+  `define DE_latch_WIDTH  (1 + `INSTBITS+`DBITS+`DBITS+ `IOPBITS + `DBITS + `DBITS + `DBITS + `DBITS + 1 + 1 + 1 + 1 + 1 + `REGNOBITS + `PHT_INDEX_BITS)
 
   `define AGEX_latch_WIDTH        (1 + `INSTBITS + `DBITS + `IOPBITS + `DBITS + `DBITS + `DBITS + 1 + 1 + `REGNOBITS + 1)
   `define MEM_latch_WIDTH    (1 + `INSTBITS+`DBITS+ `IOPBITS + `DBITS + `DBITS + `DBITS + 1 + `REGNOBITS) 
 
   `define from_DE_to_FE_WIDTH  (1) 
-  `define from_AGEX_to_FE_WIDTH (1 + `DBITS)
+  `define from_AGEX_to_FE_WIDTH (1 + `DBITS + `BHR_WIDTH)
   `define from_MEM_to_FE_WIDTH (1)
   `define from_WB_to_FE_WIDTH (1)
 
@@ -220,6 +220,14 @@
   `define from_WB_to_AGEX_WIDTH  (1)
 
   `define from_WB_to_MEM_WIDTH (1)
+
+  // Branch predictor constants
+  `define BHR_WIDTH 8
+  `define PHT_ENTRIES 256  // 2^8
+  `define PHT_COUNTER_BITS 2
+  `define BTB_ENTRIES 16
+  `define BTB_TAG_BITS 4  // log2(16) 
+  `define PHT_INDEX_BITS 8  // log2(256)
 
 
 
