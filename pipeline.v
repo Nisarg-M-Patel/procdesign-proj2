@@ -28,6 +28,8 @@ module pipeline (
 
   wire [`from_WB_to_MEM_WIDTH-1:0] from_WB_to_MEM; 
 
+  wire [`BHR_WIDTH-1:0] current_bhr_wire;
+
   FE_STAGE my_FE_stage(
     .clk(clk), 
     .reset(reset), 
@@ -35,7 +37,8 @@ module pipeline (
     .from_AGEX_to_FE(from_AGEX_to_FE),
     .from_MEM_to_FE(from_MEM_to_FE),
     .from_WB_to_FE(from_WB_to_FE),
-    .FE_latch_out(FE_latch_out)
+    .FE_latch_out(FE_latch_out),
+    .current_bhr_to_AGEX(current_bhr_wire)
   ); 
                      
   DE_STAGE my_DE_stage(
@@ -55,6 +58,7 @@ module pipeline (
     .from_MEM_to_AGEX(from_MEM_to_AGEX),    
     .from_WB_to_AGEX(from_WB_to_AGEX),   
     .from_DE_latch(DE_latch_out),
+    .current_bhr_from_FE(current_bhr_wire),
     .AGEX_latch_out(AGEX_latch_out),
     .from_AGEX_to_FE(from_AGEX_to_FE),
     .from_AGEX_to_DE(from_AGEX_to_DE)

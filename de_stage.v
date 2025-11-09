@@ -232,7 +232,7 @@ end
 
 
   assign is_br_DE  = ((op_I_DE == `BEQ_I) || (op_I_DE == `BNE_I) || (op_I_DE == `BLT_I) || (op_I_DE == `BGE_I) || (op_I_DE == `BLTU_I) || (op_I_DE == `BGEU_I)) ? 1 : 0;
-  assign is_jmp_DE = ((op_I_DE == `JAL_I) || (op_I_DE == `JR_I) || (op_I_DE == `JALR_I)) ? 1 : 0;  
+  assign is_jmp_DE = ((op_I_DE == `JAL_I) ||  (op_I_DE == `JALR_I)) ? 1 : 0;  
   assign rd_mem_DE = (op_I_DE == `LW_I) ? 1 :0 ;
   assign wr_mem_DE = (op_I_DE == `SW_I) ? 1 : 0 ; 
   assign wr_reg_DE = ((op_I_DE == `CSRR_I) || 

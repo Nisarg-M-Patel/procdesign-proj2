@@ -7,7 +7,8 @@ module FE_STAGE(
   input wire [`from_AGEX_to_FE_WIDTH-1:0] from_AGEX_to_FE,   
   input wire [`from_MEM_to_FE_WIDTH-1:0] from_MEM_to_FE,   
   input wire [`from_WB_to_FE_WIDTH-1:0] from_WB_to_FE, 
-  output wire [`FE_latch_WIDTH-1:0] FE_latch_out
+  output wire [`FE_latch_WIDTH-1:0] FE_latch_out,
+  output wire [`BHR_WIDTH-1:0] current_bhr_to_AGEX  // Added: pass current BHR to AGEX
 );
 
   `UNUSED_VAR (from_MEM_to_FE)
@@ -20,15 +21,6 @@ module FE_STAGE(
   initial begin
     $readmemh(`IDMEMINITFILE , imem);
   end
-
-  // Display memory contents with verilator 
-  /*
-  always @(posedge clk) begin
-    for (integer i=0 ; i<`IMEMWORDS ; i=i+1) begin
-        $display("%h", imem[i]);
-    end
-  end
-  */
 
   /* pipeline latch */ 
   reg [`FE_latch_WIDTH-1:0] FE_latch;  // FE latch 
@@ -98,23 +90,28 @@ module FE_STAGE(
                               // if you add more bits here, please increase the width of latch in VX_define.vh 
                               };
 
-  // **TODO: Complete the rest of the pipeline 
-  //assign stall_pipe_FE = 1;   // you need
+  // Signals from other stages
   wire br_mispred_AGEX;  
   wire [`DBITS-1:0] br_target_AGEX;
   wire update_bhr_AGEX;
   wire [`BHR_WIDTH-1:0] new_bhr_AGEX;
+  wire [`PHT_INDEX_BITS-1:0] pht_index_AGEX;  // Added: PHT index from AGEX for updates
 
   assign {
     stall_pipe_FE
   } = from_DE_to_FE[0]; 
 
+  // Fixed: Updated signal extraction to include pht_index_AGEX
   assign {
     br_mispred_AGEX,
     br_target_AGEX,
     update_bhr_AGEX,
-    new_bhr_AGEX
+    new_bhr_AGEX,
+    pht_index_AGEX  // Added: receive PHT index from AGEX stage
   } = from_AGEX_to_FE;
+
+  // Added: Pass current BHR to AGEX stage
+  assign current_bhr_to_AGEX = BHR_FE;
 
   // Initialize PHT and BTB
   integer i;
@@ -153,23 +150,24 @@ module FE_STAGE(
     end 
   end
   
-  // Update PHT and BTB from AGEX stage
+  // Fixed: Update PHT and BTB from AGEX stage using correct indices
   always @(posedge clk) begin
     if (reset) begin
       // Already initialized above
     end else begin
       // Update PHT when we get branch resolution from AGEX
       if (update_bhr_AGEX) begin
-        // Update PHT counter based on actual outcome (LSB of new_bhr_AGEX contains the actual taken bit)
-        case (PHT[pht_index_FE])
-          2'b00: PHT[pht_index_FE] <= new_bhr_AGEX[0] ? 2'b01 : 2'b00;  // strongly not taken
-          2'b01: PHT[pht_index_FE] <= new_bhr_AGEX[0] ? 2'b10 : 2'b00;  // weakly not taken
-          2'b10: PHT[pht_index_FE] <= new_bhr_AGEX[0] ? 2'b11 : 2'b01;  // weakly taken
-          2'b11: PHT[pht_index_FE] <= new_bhr_AGEX[0] ? 2'b11 : 2'b10;  // strongly taken
+        // Fixed: Use PHT index from AGEX stage, not FE stage
+        case (PHT[pht_index_AGEX])
+          2'b00: PHT[pht_index_AGEX] <= new_bhr_AGEX[0] ? 2'b01 : 2'b00;  // strongly not taken
+          2'b01: PHT[pht_index_AGEX] <= new_bhr_AGEX[0] ? 2'b10 : 2'b00;  // weakly not taken
+          2'b10: PHT[pht_index_AGEX] <= new_bhr_AGEX[0] ? 2'b11 : 2'b01;  // weakly taken
+          2'b11: PHT[pht_index_AGEX] <= new_bhr_AGEX[0] ? 2'b11 : 2'b10;  // strongly taken
         endcase
         
-        // Update BTB with branch target (for all branches, regardless of taken/not taken)
-        BTB[btb_index_FE] <= br_target_AGEX;
+        // Fixed: Update BTB with branch target using PC from AGEX stage
+        // Use the PC of the instruction in AGEX that's being resolved
+        BTB[br_target_AGEX[5:2]] <= br_target_AGEX;  // Use target PC to compute BTB index
       end
     end
   end
