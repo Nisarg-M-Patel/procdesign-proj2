@@ -53,9 +53,13 @@ module AGEX_STAGE(
   reg [`BHR_WIDTH-1:0] updated_bhr_AGEX;
   reg update_bhr_AGEX;
 
-  // *** ADDED: Branch prediction accuracy counters (for testing only) ***
-  reg [`DBITS-1:0] br_count;      // Total executed branch instructions
-  reg [`DBITS-1:0] br_correct;    // Correctly predicted branches
+  // *** REMOVED: Branch prediction accuracy counters - moved to FE stage ***
+  // reg [`DBITS-1:0] br_count;      
+  // reg [`DBITS-1:0] br_correct;    
+
+  // *** ADDED: Signal to indicate branch execution for FE counting ***
+  wire is_branch_executing_AGEX;
+  assign is_branch_executing_AGEX = valid_AGEX && is_br_AGEX;
 
   
   // Calculate branch condition
@@ -138,30 +142,30 @@ module AGEX_STAGE(
   always @(*) begin
     if (is_br_AGEX || is_jmp_AGEX) begin
       update_bhr_AGEX = 1'b1;
-      updated_bhr_AGEX = {current_bhr_from_FE[`BHR_WIDTH-2:0], actual_taken_AGEX}; // Fixed: Use current BHR, not pht_index
+      updated_bhr_AGEX = {current_bhr_from_FE[`BHR_WIDTH-2:0], actual_taken_AGEX}; 
     end else begin
       update_bhr_AGEX = 1'b0;
       updated_bhr_AGEX = {`BHR_WIDTH{1'b0}};
     end
   end
 
-  // *** ADDED: Branch prediction accuracy tracking (internal counters only) ***
-  always @(posedge clk) begin
-    if (reset) begin
-      br_count <= 32'h0;
-      br_correct <= 32'h0;
-    end else begin
-      // Count branches
-      if (valid_AGEX && is_br_AGEX) begin
-        br_count <= br_count + 1'b1;
-        
-        // Count correct predictions (no misprediction = correct)
-        if (!br_mispred_AGEX) begin
-          br_correct <= br_correct + 1'b1;
-        end
-      end
-    end
-  end
+  // *** REMOVED: Branch prediction accuracy tracking - moved to FE stage ***
+  // always @(posedge clk) begin
+  //   if (reset) begin
+  //     br_count <= 32'h0;
+  //     br_correct <= 32'h0;
+  //   end else begin
+  //     // Count branches
+  //     if (valid_AGEX && is_br_AGEX) begin
+  //       br_count <= br_count + 1'b1;
+  //       
+  //       // Count correct predictions (no misprediction = correct)
+  //       if (!br_mispred_AGEX) begin
+  //         br_correct <= br_correct + 1'b1;
+  //       end
+  //     end
+  //   end
+  // end
 
   assign  {                     
                               valid_AGEX,
@@ -209,13 +213,14 @@ module AGEX_STAGE(
         end 
   end
 
-  // Fixed: forward signals to FE stage - added pht_index_AGEX
+  // *** UPDATED: forward signals to FE stage - added branch execution signal ***
   assign from_AGEX_to_FE = { 
     br_mispred_AGEX, 
     br_target_AGEX,
     update_bhr_AGEX,
     updated_bhr_AGEX,
-    pht_index_AGEX  // Added: pass PHT index back for updates
+    pht_index_AGEX,
+    is_branch_executing_AGEX  // *** ADDED: signal for FE to count branches ***
   };
 
   // forward signals to DE stage

@@ -44,6 +44,10 @@ module FE_STAGE(
   reg [`PHT_COUNTER_BITS-1:0] PHT [`PHT_ENTRIES-1:0];  // Pattern History Table
   reg [`DBITS-1:0] BTB [`BTB_ENTRIES-1:0];  // Branch Target Buffer
   
+  // *** ADDED: Branch prediction accuracy counters ***
+  reg [`DBITS-1:0] total_branches_FE;         // Total executed branch instructions
+  reg [`DBITS-1:0] mispredicted_branches_FE;  // Total mispredicted branches
+  
   // Branch prediction signals
   wire [`PHT_INDEX_BITS-1:0] pht_index_FE;
   wire [3:0] btb_index_FE;
@@ -96,22 +100,42 @@ module FE_STAGE(
   wire update_bhr_AGEX;
   wire [`BHR_WIDTH-1:0] new_bhr_AGEX;
   wire [`PHT_INDEX_BITS-1:0] pht_index_AGEX;  // Added: PHT index from AGEX for updates
+  wire is_branch_executing_AGEX;              // *** ADDED: branch execution signal ***
 
   assign {
     stall_pipe_FE
   } = from_DE_to_FE[0]; 
 
-  // Fixed: Updated signal extraction to include pht_index_AGEX
+  // *** UPDATED: signal extraction to include branch execution signal ***
   assign {
     br_mispred_AGEX,
     br_target_AGEX,
     update_bhr_AGEX,
     new_bhr_AGEX,
-    pht_index_AGEX  // Added: receive PHT index from AGEX stage
+    pht_index_AGEX,
+    is_branch_executing_AGEX  // *** ADDED: extract branch execution signal ***
   } = from_AGEX_to_FE;
 
   // Added: Pass current BHR to AGEX stage
   assign current_bhr_to_AGEX = BHR_FE;
+
+  // *** ADDED: Branch prediction accuracy counting logic ***
+  always @(posedge clk) begin
+    if (reset) begin
+      total_branches_FE <= 0;
+      mispredicted_branches_FE <= 0;
+    end else begin
+      // Count total branches executed
+      if (is_branch_executing_AGEX) begin
+        total_branches_FE <= total_branches_FE + 1;
+      end
+      
+      // Count mispredicted branches
+      if (is_branch_executing_AGEX && br_mispred_AGEX) begin
+        mispredicted_branches_FE <= mispredicted_branches_FE + 1;
+      end
+    end
+  end
 
   // Initialize PHT and BTB
   integer i;
