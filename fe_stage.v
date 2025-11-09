@@ -45,9 +45,8 @@ module FE_STAGE(
   reg [`DBITS-1:0] BTB [`BTB_ENTRIES-1:0];  // Branch Target Buffer
   
   // *** ADDED: Branch prediction accuracy counters ***
-  reg [`DBITS-1:0] total_branches_FE;         // Total executed branch instructions
-  reg [`DBITS-1:0] mispredicted_branches_FE;  // Total mispredicted branches
-  
+  reg [`DBITS-1:0] total_branches_FE /* verilator public */;         // Total executed branch instructions
+  reg [`DBITS-1:0] mispredicted_branches_FE /* verilator public */;  // Total mispredicted branches
   // Branch prediction signals
   wire [`PHT_INDEX_BITS-1:0] pht_index_FE;
   wire [3:0] btb_index_FE;

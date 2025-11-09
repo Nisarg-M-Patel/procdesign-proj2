@@ -4,6 +4,7 @@
 // without warranty, 2017 by Wilson Snyder.
 //======================================================================
 #include <iostream>
+#include <iomanip>
 
 // Include common routines
 #include <verilated.h>
@@ -96,7 +97,21 @@ int main(int argc, char** argv, char** env) {
     }
 
 #ifdef DPRINTF
-    std::cout << "Total instructions=" << std::dec << inst_count_WB << ", cycles=" << (timestamp_WB / 2) << ", IPC=" << ((inst_count_WB * 2.0f) / timestamp_WB) << std::endl; 
+    // Get branch prediction statistics
+    uint32_t total_branches = (uint32_t)dut->pipeline->my_FE_stage->total_branches_FE;
+    uint32_t mispredicted = (uint32_t)dut->pipeline->my_FE_stage->mispredicted_branches_FE;
+    uint32_t correct_predictions = total_branches - mispredicted;
+    double accuracy = (total_branches > 0) ? (correct_predictions * 100.0 / total_branches) : 0.0;
+    
+    std::cout << "Total instructions=" << std::dec << inst_count_WB 
+              << ", cycles=" << (timestamp_WB / 2) 
+              << ", IPC=" << ((inst_count_WB * 2.0f) / timestamp_WB);
+    
+    std::cout << ", Branches=" << total_branches 
+              << ", Mispredicted=" << mispredicted 
+              << ", Accuracy=" << std::fixed << std::setprecision(2) << accuracy << "%";
+    
+    std::cout << std::endl; 
 #endif
 
     int exitcode = (int)dut->pipeline->my_WB_stage->last_WB_value[3];
