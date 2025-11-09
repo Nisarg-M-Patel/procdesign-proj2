@@ -133,9 +133,7 @@ module AGEX_STAGE(
   wire actual_taken_AGEX;
   assign actual_taken_AGEX = (is_br_AGEX && br_cond_AGEX) || is_jmp_AGEX;
 
-  // Fixed: BHR update logic - need access to current BHR from FE stage
-  // This will need to be connected from FE stage via a signal
-  assign current_bhr_FE = current_bhr_from_FE;
+  
   
   always @(*) begin
     if (is_br_AGEX || is_jmp_AGEX) begin
