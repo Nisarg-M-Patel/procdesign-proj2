@@ -24,7 +24,7 @@ module FE_STAGE(
 
   /* pipeline latch */ 
   reg [`FE_latch_WIDTH-1:0] FE_latch;  // FE latch 
-  wire valid_FE;
+  assign valid_FE = 1'b1;
    
   `UNUSED_VAR(valid_FE)
   reg [`DBITS-1:0] PC_FE_latch; // PC latch in the FE stage   
