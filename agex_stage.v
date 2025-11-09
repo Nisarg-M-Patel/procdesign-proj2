@@ -138,7 +138,7 @@ module AGEX_STAGE(
   always @(*) begin
     if (is_br_AGEX || is_jmp_AGEX) begin
       update_bhr_AGEX = 1'b1;
-      updated_bhr_AGEX = {current_bhr_FE[`BHR_WIDTH-2:0], actual_taken_AGEX}; // Fixed: Use current BHR, not pht_index
+      updated_bhr_AGEX = {current_bhr_from_FE[`BHR_WIDTH-2:0], actual_taken_AGEX}; // Fixed: Use current BHR, not pht_index
     end else begin
       update_bhr_AGEX = 1'b0;
       updated_bhr_AGEX = {`BHR_WIDTH{1'b0}};
